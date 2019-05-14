@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>OpenSshKey.Parser</AssemblyName>
+    <RootNamespace>OpenSshKey.Parser</RootNamespace>
+  </PropertyGroup>
+
+</Project>
