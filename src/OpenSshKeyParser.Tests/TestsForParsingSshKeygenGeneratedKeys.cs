@@ -87,19 +87,27 @@ namespace OpenSshKey.Parser.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public void OpenSshKeyParser_ParseOpenSshKeyFile_sshkeygen_DSA()
         {
             var data = TestHelpers.GetResourceData("sshkeygen", "DSA.txt");
-            OpenSshKeyParser.ParseOpenSshKeyFile(data);
+            var keyPair = OpenSshKeyParser.ParseOpenSshKeyFile(data);
+            Assert.IsTrue(keyPair != null && keyPair is DsaKeyPair);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public void OpenSshKeyParser_ParseOpenSshKeyFile_sshkeygen_DSA_Encrypted()
         {
             var data = TestHelpers.GetResourceData("sshkeygen", "DSA.Encrypted.txt");
-            OpenSshKeyParser.ParseOpenSshKeyFile(data, "password");
+            var keyPair = OpenSshKeyParser.ParseOpenSshKeyFile(data, "password");
+            Assert.IsTrue(keyPair != null && keyPair is DsaKeyPair);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(OpenSshKeyParseException))]
+        public void OpenSshKeyParser_ParseOpenSshKeyFile_WithWrongPassphrase_sshkeygen_RSA_Encrypted()
+        {
+            var data = TestHelpers.GetResourceData("sshkeygen", "RSA.Encrypted.txt");
+            OpenSshKeyParser.ParseOpenSshKeyFile(data, "wrong_password");
         }
     }
 }

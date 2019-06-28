@@ -4,11 +4,10 @@ C# parser for private keys in the OpenSSH file format (i.e. openssh-key-v1).
 The following key types are supported
 * ssh-ed25519
 * ssh-rsa
+* ssh-dss (DSA)
 * ecdsa-sha2-nistp256
 * ecdsa-sha2-nistp384
 * ecdsa-sha2-nistp521
-
-Note: Parsing a DSA key (ssh-dss) is not yet implemented (but I hope to soon).
 
 Example usage:
 ```cs

@@ -67,7 +67,7 @@ namespace OpenSshKey.Parser
             }
             catch(Exception e)
             {
-                if(e is OpenSshKeyParseException || e is NotImplementedException)
+                if(e is OpenSshKeyParseException)
                 {
                     throw e;
                 }
@@ -253,9 +253,13 @@ namespace OpenSshKey.Parser
             }
             else if (keyType == KeyTypes.DSA)
             {
-                //TODO needs implementation
-                //p, q, g, y, x
-                throw new NotImplementedException($"key type '{keyType}' is not yet supported by this parser");
+                var p = privateKeySectionReader.ReadBigInteger();
+                var q = privateKeySectionReader.ReadBigInteger();
+                var g = privateKeySectionReader.ReadBigInteger();
+                var y = privateKeySectionReader.ReadBigInteger();
+                var x = privateKeySectionReader.ReadBigInteger();
+                var comment = privateKeySectionReader.ReadString(Encoding.UTF8);
+                keyPair = new DsaKeyPair(comment, p, q, g, y, x);
             }
             else
             {
